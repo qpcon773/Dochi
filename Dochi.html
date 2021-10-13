@@ -1,1 +1,25 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>Dochi!!!</title>
+    <link href="src/Dochi.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="App">
+        <div v-for='item in items' class="datas">
+            {{ item.name }}
+            {{ item.id }}
+            {{ item.team }}
+        </div>
+        <button @click=team_pick>btn</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue2-touch-events@3.2.2/index.min.js"></script>
+    <script src="src/Dochi.js"></script>
+</body>
+
+</html>
