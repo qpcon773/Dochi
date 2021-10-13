@@ -8,12 +8,13 @@
 
 <body>
     <div id="App">
-        <div v-for='item in items' class="datas">
+        <div v-for="item in items" v-if="item.view" class="datas">
             {{ item.name }}
             {{ item.id }}
             {{ item.team }}
         </div>
         <button @click=team_pick>btn</button>
+        <button @click=team_clear>btn2</button>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
