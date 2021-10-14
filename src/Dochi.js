@@ -3,13 +3,14 @@ Vue.config.devtools = true;
 let idtachi
 let debue = []
 let winner = []
+let taiman = []
 let team = ""
 let itemlength
 
 var vm = new Vue({
     el: '#App',
     data: {
-        number: 0,
+        rount: false,
         items: [{
                 name: "a",
                 id: "1",
@@ -68,14 +69,17 @@ var vm = new Vue({
             },
         ],
     },
+
     methods: {
         team_pick() {
             for (j = 1; j <= 2; j++) {
                 
                 let ran2 = parseInt(Math.random() * itemlength);
-
+                
                 if (this.items[ran2].lose) {
-                    console.log(this.items[ran2].id)
+                    
+                    console.log(ran2)
+                    console.log(this.items)
                     this.items[ran2].lose = false
                     debue.push(ran2)
                     this.items[ran2].view = true
@@ -90,27 +94,30 @@ var vm = new Vue({
                 } else if (idtachi < 0) {
 
                     if(winner.length>0){
-                        winner.forEach(id => {
-                            this.items[id-1].lose = true
-                            console.log(this.items[id-1])
+                        winner.forEach(name => {
+                            console.log("變更前",this.items[name-1])
+                            this.items[name-1].lose = true
+                            console.log("變更後",this.items[name-1])
+                            this.rount=true
                         });
                         alert('下一輪')
                         idtachi = winner.length
                         itemlength = winner.length
                         winner = []
-                        console.log("over")
+                        j = 2
                     }else{
                         alert('沒了')
                         j = 2
                     }
-
                 }
             }
         },
         team_clear() {
             if (this.items[debue[0]]) {
                 this.items[debue[0]].view = false
+                this.items[debue[0]].lose = false
                 this.items[debue[1]].view = false
+                this.items[debue[1]].lose = false
                 debue = []
             }
         },
