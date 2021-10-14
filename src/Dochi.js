@@ -1,7 +1,10 @@
 Vue.config.devtools = true;
 
-let debue=[]
+let idtachi
+let debue = []
+let winner = []
 let team = ""
+let itemlength
 
 var vm = new Vue({
     el: '#App',
@@ -11,7 +14,6 @@ var vm = new Vue({
                 name: "a",
                 id: "1",
                 src: "",
-                team: "",
                 view: false,
                 lose: true
             },
@@ -19,7 +21,6 @@ var vm = new Vue({
                 name: "b",
                 id: "2",
                 src: "",
-                team: "",
                 view: false,
                 lose: true
             },
@@ -27,7 +28,6 @@ var vm = new Vue({
                 name: "c",
                 id: "3",
                 src: "",
-                team: "",
                 view: false,
                 lose: true
             },
@@ -35,7 +35,6 @@ var vm = new Vue({
                 name: "d",
                 id: "4",
                 src: "",
-                team: "",
                 view: false,
                 lose: true
             },
@@ -43,7 +42,6 @@ var vm = new Vue({
                 name: "e",
                 id: "5",
                 src: "",
-                team: "",
                 view: false,
                 lose: true
             },
@@ -51,7 +49,20 @@ var vm = new Vue({
                 name: "f",
                 id: "6",
                 src: "",
-                team: "",
+                view: false,
+                lose: true
+            },
+            {
+                name: "g",
+                id: "7",
+                src: "",
+                view: false,
+                lose: true
+            },
+            {
+                name: "h",
+                id: "8",
+                src: "",
                 view: false,
                 lose: true
             },
@@ -59,57 +70,88 @@ var vm = new Vue({
     },
     methods: {
         team_pick() {
-            let itemlength = this.items.length
-            for(j=1;j<=2;j++){
+            for (j = 1; j <= 2; j++) {
+                
                 let ran2 = parseInt(Math.random() * itemlength);
-                if(this.items[ran2].lose){
-                    this.items[ran2].lose=false
+
+                if (this.items[ran2].lose) {
+                    console.log(this.items[ran2].id)
+                    this.items[ran2].lose = false
                     debue.push(ran2)
-                    this.items[ran2].view=true
-                }else{
-                    if(j==0){
-                        j=2
-                    }else{
-                        j--
-                    }
+                    this.items[ran2].view = true
+                    idtachi--
+                } else {
+                    j--
                 }
-                console.log(debue,j)
+
+                if (idtachi == 0) {
+                    j = 2
+                    idtachi--
+                } else if (idtachi < 0) {
+
+                    if(winner.length>0){
+                        winner.forEach(id => {
+                            this.items[id-1].lose = true
+                            console.log(this.items[id-1])
+                        });
+                        alert('下一輪')
+                        idtachi = winner.length
+                        itemlength = winner.length
+                        winner = []
+                        console.log("over")
+                    }else{
+                        alert('沒了')
+                        j = 2
+                    }
+
+                }
             }
         },
         team_clear() {
-            console.log('1')
-            this.items[debue[0]].view=false
-            this.items[debue[1]].view=false
-            debue=[]
+            if (this.items[debue[0]]) {
+                this.items[debue[0]].view = false
+                this.items[debue[1]].view = false
+                debue = []
+            }
+        },
+        eran(id) {
+            alert(id + "獲勝，進入下一回合")
+            winner.push(id)
+            console.log(winner)
+            this.team_clear()
+            this.team_pick()
         }
     },
     created() {
         let base = []
         let even = []
-        let itemlength = this.items.length
-        if (itemlength % 2 == 1) {
-            alert("要偶數才能正常運行");
+        itemlength = this.items.length
+        idtachi = itemlength
+        if (itemlength % 4 != 0) {
+            alert("要4的倍數才能正常運行");
             $("#App").toggle()
         }
 
-        for (i = 1; i <= itemlength; i++) {
-            let ran = parseInt(Math.random() * 2);
+        // for (i = 1; i <= itemlength; i++) {
+        //     let ran = parseInt(Math.random() * 2);
 
-            if (base.length >= itemlength / 2) {
-                ran = 0
-            } else if (even.length >= itemlength / 2) {
-                ran = 1
-            }
+        //     if (base.length >= itemlength / 2) {
+        //         ran = 0
+        //     } else if (even.length >= itemlength / 2) {
+        //         ran = 1
+        //     }
 
-            if (ran % 2 == 0) {
-                even.push(ran)
-                team = "blue"
-            } else {
-                base.push(ran)
-                team = "red"
-            }
+        //     if (ran % 2 == 0) {
+        //         even.push(ran)
+        //         team = "blue"
 
-            this.items[i - 1].team = team
-        }
+        //     } else {
+        //         base.push(ran)
+        //         team = "red"
+        //     }
+
+        //     this.items[i - 1].team = team
+        // }
+        this.team_pick()
     },
 })
