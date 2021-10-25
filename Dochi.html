@@ -9,23 +9,35 @@
 
 <body>
     <div id="App">
-        <ul v-for="data in datas" class="datas">
-            <li v-if="data.view">
-                {{ data.name }}
-                {{ data.id }}
-                <button v-if="data.lose" @click=eran(data.id)>pick</button>
-            </li>
-        </ul>
-        <p>---------------------------------------</p>
-        <div v-for="item in items">
+        <div class="dochi">
+            <ul v-for="data in datas" :class=data.class_name>
+                <li v-if="data.view">
+                    {{ data.name }}
+                    {{ data.id }}
+                    <button v-if="data.lose" @click=eran(data.id)>pick</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- <p class="test">---------------測試介面---------------</p>
+        <div v-for="item in items" class="test">
             名稱：{{ item.name }}<br>
             勝敗：{{ item.lose }}<br>
             出場：{{ item.going }}<br><br>
         </div>
+        <p class="test">---------------測試介面---------------</p> -->
+
+        <div v-if="ui">
+            <p class="test">---------------晉級名單---------------</p>
+            <div v-for="winner in winners" class="test">
+                名稱：{{ winner.name }}<br>
+            </div>
+            <p class="test">---------------晉級名單---------------</p>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue2-touch-events@3.2.2/index.min.js"></script>
     <script src="src/Dochi.js"></script>

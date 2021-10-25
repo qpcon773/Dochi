@@ -1,4 +1,42 @@
-div {
-  color: violet;
+* {
+  overflow-x: hidden;
+}
+
+.test {
+  color: green;
+}
+
+.dochi {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dochi ul {
+  width: 100%;
+  border: solid 1px #000;
+  padding: 0;
+}
+
+.dochi ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style: none;
+}
+
+.click {
+  position: relative;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  width: 0 !important;
+  opacity: 0;
 }
 /*# sourceMappingURL=Dochi.css.map */

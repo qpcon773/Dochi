@@ -9,11 +9,12 @@ let next = []
 var vm = new Vue({
     el: '#App',
     data: {
-        rount: false,
+        ui: false,
         items: [{
                 name: "a",
                 id: "1",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -22,6 +23,7 @@ var vm = new Vue({
                 name: "b",
                 id: "2",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -30,6 +32,7 @@ var vm = new Vue({
                 name: "c",
                 id: "3",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -38,6 +41,7 @@ var vm = new Vue({
                 name: "d",
                 id: "4",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -46,6 +50,7 @@ var vm = new Vue({
                 name: "e",
                 id: "5",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -54,6 +59,7 @@ var vm = new Vue({
                 name: "f",
                 id: "6",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -62,6 +68,7 @@ var vm = new Vue({
                 name: "g",
                 id: "7",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
@@ -70,12 +77,16 @@ var vm = new Vue({
                 name: "h",
                 id: "8",
                 src: "",
+                class_name: "",
                 view: false,
                 lose: true,
                 going: false,
             },
         ],
         datas: [{
+
+        }],
+        winners: [{
 
         }],
     },
@@ -86,15 +97,13 @@ var vm = new Vue({
 
             if (round <= 0) {
                 this.next_round()
-            }
-            else {
+            } else {
                 if (this.items[ran2].going == false) {
                     this.items[ran2].view = true
                     this.items[ran2].going = true
                     this.datas.push(this.items[ran2])
                     pk.push(this.items[ran2].id)
                     round--
-                    console.log(round)
                 };
 
                 if (pk.length < 2) {
@@ -107,13 +116,22 @@ var vm = new Vue({
             // });
         },
         eran(eran_name) {
+            this.ui = true
             eran_name--
-            alert(this.items[eran_name].name + "獲勝")
             next.push(this.items[eran_name].id)
-            this.datas = []
-            console.log(next)
+            this.winners.push(this.items[eran_name])
+            console.log(pk)
+            this.items[pk[0]-1].class_name="click"
+            this.items[pk[1]-1].class_name="click"
             pk = []
-            this.team_pick()
+            this.items[eran_name].class_name=""
+            this.animation_time()
+        },
+        animation_time () {
+            
+        },
+        animation_stop(){
+            this.datas = []
         },
         next_round() {
             if (next.length > 0) {
@@ -122,18 +140,19 @@ var vm = new Vue({
                     element--
                     this.items[element].going = false
                 });
+                this.winners = []
                 next = []
-                console.log(round)
                 this.team_pick()
             } else {
-                this.datas[0].lose= false
-                console.log('owari')
-                console.log(this.datas)
+                this.ui = false
+                this.datas[0].lose = false
             }
 
         },
     },
     created() {
+        this.datas = []
+        this.winners = []
         round = this.items.length
         itemlength = this.items.length
         idtachi = itemlength
