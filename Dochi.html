@@ -9,12 +9,19 @@
 
 <body>
     <div id="App">
-        <div v-for="item in items" v-if="item.view" class="datas">
-            {{ item.name }}
-            {{ item.id }}
-            <button @click=eran(item.id)>pick</button>
+        <ul v-for="data in datas" class="datas">
+            <li v-if="data.view">
+                {{ data.name }}
+                {{ data.id }}
+                <button v-if="data.lose" @click=eran(data.id)>pick</button>
+            </li>
+        </ul>
+        <p>---------------------------------------</p>
+        <div v-for="item in items">
+            名稱：{{ item.name }}<br>
+            勝敗：{{ item.lose }}<br>
+            出場：{{ item.going }}<br><br>
         </div>
-        <button v-if="rount">pick</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"

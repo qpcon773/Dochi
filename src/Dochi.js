@@ -1,11 +1,10 @@
 Vue.config.devtools = true;
 
 let idtachi
-let debue = []
-let winner = []
-let taiman = []
-let team = ""
 let itemlength
+let round
+let pk = []
+let next = []
 
 var vm = new Vue({
     el: '#App',
@@ -16,122 +15,126 @@ var vm = new Vue({
                 id: "1",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "b",
                 id: "2",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "c",
                 id: "3",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "d",
                 id: "4",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "e",
                 id: "5",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "f",
                 id: "6",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "g",
                 id: "7",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
             {
                 name: "h",
                 id: "8",
                 src: "",
                 view: false,
-                lose: true
+                lose: true,
+                going: false,
             },
         ],
+        datas: [{
+
+        }],
     },
 
     methods: {
         team_pick() {
-            for (j = 1; j <= 2; j++) {
-                
-                let ran2 = parseInt(Math.random() * itemlength);
-                
-                if (this.items[ran2].lose) {
-                    
-                    console.log(ran2)
-                    console.log(this.items)
-                    this.items[ran2].lose = false
-                    debue.push(ran2)
+            let ran2 = parseInt(Math.random() * itemlength);
+
+            if (round <= 0) {
+                this.next_round()
+            }
+            else {
+                if (this.items[ran2].going == false) {
                     this.items[ran2].view = true
-                    idtachi--
-                } else {
-                    j--
-                }
+                    this.items[ran2].going = true
+                    this.datas.push(this.items[ran2])
+                    pk.push(this.items[ran2].id)
+                    round--
+                    console.log(round)
+                };
 
-                if (idtachi == 0) {
-                    j = 2
-                    idtachi--
-                } else if (idtachi < 0) {
-
-                    if(winner.length>0){
-                        winner.forEach(name => {
-                            console.log("變更前",this.items[name-1])
-                            this.items[name-1].lose = true
-                            console.log("變更後",this.items[name-1])
-                            this.rount=true
-                        });
-                        alert('下一輪')
-                        idtachi = winner.length
-                        itemlength = winner.length
-                        winner = []
-                        j = 2
-                    }else{
-                        alert('沒了')
-                        j = 2
-                    }
+                if (pk.length < 2) {
+                    this.team_pick()
                 }
             }
+            // this.items.forEach(element => {
+            //     console.log(element.id)
+
+            // });
         },
-        team_clear() {
-            if (this.items[debue[0]]) {
-                this.items[debue[0]].view = false
-                this.items[debue[0]].lose = false
-                this.items[debue[1]].view = false
-                this.items[debue[1]].lose = false
-                debue = []
-            }
-        },
-        eran(id) {
-            alert(id + "獲勝，進入下一回合")
-            winner.push(id)
-            console.log(winner)
-            this.team_clear()
+        eran(eran_name) {
+            eran_name--
+            alert(this.items[eran_name].name + "獲勝")
+            next.push(this.items[eran_name].id)
+            this.datas = []
+            console.log(next)
+            pk = []
             this.team_pick()
-        }
+        },
+        next_round() {
+            if (next.length > 0) {
+                round = next.length
+                next.forEach(element => {
+                    element--
+                    this.items[element].going = false
+                });
+                next = []
+                console.log(round)
+                this.team_pick()
+            } else {
+                this.datas[0].lose= false
+                console.log('owari')
+                console.log(this.datas)
+            }
+
+        },
     },
     created() {
-        let base = []
-        let even = []
+        round = this.items.length
         itemlength = this.items.length
         idtachi = itemlength
         if (itemlength % 4 != 0) {
@@ -139,26 +142,6 @@ var vm = new Vue({
             $("#App").toggle()
         }
 
-        // for (i = 1; i <= itemlength; i++) {
-        //     let ran = parseInt(Math.random() * 2);
-
-        //     if (base.length >= itemlength / 2) {
-        //         ran = 0
-        //     } else if (even.length >= itemlength / 2) {
-        //         ran = 1
-        //     }
-
-        //     if (ran % 2 == 0) {
-        //         even.push(ran)
-        //         team = "blue"
-
-        //     } else {
-        //         base.push(ran)
-        //         team = "red"
-        //     }
-
-        //     this.items[i - 1].team = team
-        // }
         this.team_pick()
     },
 })
