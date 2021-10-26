@@ -14,8 +14,10 @@
                 <li v-if="data.view">
                     {{ data.name }}
                     {{ data.id }}
-                    <button v-if="data.lose" @click=eran(data.id)>pick</button>
+                    <button v-if="data.lose" @click=eran(data.id) class="btn">pick</button>
+                    <button @click=animation_end() class="animation_btn d_none">aaa</button>
                 </li>
+
             </ul>
         </div>
 

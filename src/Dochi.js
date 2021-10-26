@@ -11,13 +11,13 @@ var vm = new Vue({
     data: {
         ui: false,
         items: [{
-                name: "a",
-                id: "1",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
+                name: "a", //要顯示的名字
+                id: "1", //id 照著123456789的順序打下去就好
+                src: "", //圖片放置的連結
+                class_name: "", //不用管他 直接複製就好
+                view: false, //不用管他 直接複製就好
+                lose: true, //不用管他 直接複製就好
+                going: false, //不用管他 直接複製就好
             },
             {
                 name: "b",
@@ -40,42 +40,6 @@ var vm = new Vue({
             {
                 name: "d",
                 id: "4",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
-            {
-                name: "e",
-                id: "5",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
-            {
-                name: "f",
-                id: "6",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
-            {
-                name: "g",
-                id: "7",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
-            {
-                name: "h",
-                id: "8",
                 src: "",
                 class_name: "",
                 view: false,
@@ -120,18 +84,21 @@ var vm = new Vue({
             eran_name--
             next.push(this.items[eran_name].id)
             this.winners.push(this.items[eran_name])
-            console.log(pk)
-            this.items[pk[0]-1].class_name="click"
-            this.items[pk[1]-1].class_name="click"
+            // this.items[pk[0]-1].class_name="click"
+            // this.items[pk[1]-1].class_name="click"
             pk = []
-            this.items[eran_name].class_name=""
+
+            // this.items[eran_name].class_name=""
             this.animation_time()
+
         },
-        animation_time () {
-            
+        animation_time() {
+
         },
-        animation_stop(){
+        animation_end() {
+            motoda();
             this.datas = []
+            this.team_pick()
         },
         next_round() {
             if (next.length > 0) {
@@ -164,3 +131,23 @@ var vm = new Vue({
         this.team_pick()
     },
 })
+
+$(".btn").click(function () {
+    let target = $(this).parent().parent()
+    target.attr("winner", 1)
+    $("ul").not("[winner='1']").animate({
+        width: "0%",
+        opacity: "0"
+    }, 500, function () {
+        $(".animation_btn").removeClass("d_none")
+        target.attr("winner", "")
+    })
+})
+
+function motoda() {
+    $(".animation_btn").addClass("d_none")
+    $("ul").animate({
+        width: "100%",
+        opacity: "1"
+    }, 0)
+}

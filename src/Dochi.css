@@ -32,11 +32,7 @@
   list-style: none;
 }
 
-.click {
-  position: relative;
-  -webkit-transition-duration: 1s;
-          transition-duration: 1s;
-  width: 0 !important;
-  opacity: 0;
+.d_none {
+  display: none;
 }
 /*# sourceMappingURL=Dochi.css.map */
