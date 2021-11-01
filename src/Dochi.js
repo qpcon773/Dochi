@@ -11,41 +11,45 @@ var vm = new Vue({
     data: {
         ui: false,
         items: [{
-                name: "a", //要顯示的名字
-                id: "1", //id 照著123456789的順序打下去就好
-                src: "", //圖片放置的連結
-                class_name: "", //不用管他 直接複製就好
-                view: false, //不用管他 直接複製就好
-                lose: true, //不用管他 直接複製就好
-                going: false, //不用管他 直接複製就好
-            },
-            {
-                name: "b",
-                id: "2",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
-            {
-                name: "c",
-                id: "3",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
-            {
-                name: "d",
-                id: "4",
-                src: "",
-                class_name: "",
-                view: false,
-                lose: true,
-                going: false,
-            },
+            id: "1", //id 照著123456789的順序打下去就好
+            name: "丁丁", //要顯示的名字
+            from: "天線寶寶",//作品的名字
+            src: "img/DingDing.jpg", //圖片放置的連結
+            class_name: "", //不用管他 直接複製就好
+            view: false, //不用管他 直接複製就好
+            lose: true, //不用管他 直接複製就好
+            going: false, //不用管他 直接複製就好
+        },
+        {
+            id: "2",
+            name: "迪西",
+            from: "天線寶寶",
+            src: "img/Dicy.jpg",
+            class_name: "",
+            view: false,
+            lose: true,
+            going: false,
+        },
+        {
+            id: "3",
+            name: "拉拉",
+            from: "天線寶寶",
+            src: "img/LaLa.jpg",
+            class_name: "",
+            view: false,
+            lose: true,
+            going: false,
+        },
+        {
+            id: "4",
+            name: "小波",
+            from: "天線寶寶",
+            src: "img/Po.png",
+            class_name: "",
+            view: false,
+            lose: true,
+            going: false,
+        },
         ],
         datas: [{
 
@@ -83,12 +87,11 @@ var vm = new Vue({
             this.ui = true
             eran_name--
             next.push(this.items[eran_name].id)
-            this.winners.push(this.items[eran_name])
-            // this.items[pk[0]-1].class_name="click"
-            // this.items[pk[1]-1].class_name="click"
-            pk = []
 
-            // this.items[eran_name].class_name=""
+            if (pk.length > 0) {
+                this.winners.push(this.items[eran_name])
+            }
+            pk = []
             this.animation_time()
 
         },
@@ -133,6 +136,7 @@ var vm = new Vue({
 })
 
 $(".btn").click(function () {
+    $(this).addClass("event_none")
     let target = $(this).parent().parent()
     target.attr("winner", 1)
     $("ul").not("[winner='1']").animate({
@@ -145,6 +149,7 @@ $(".btn").click(function () {
 })
 
 function motoda() {
+    $(".btn").removeClass("event_none")
     $(".animation_btn").addClass("d_none")
     $("ul").animate({
         width: "100%",

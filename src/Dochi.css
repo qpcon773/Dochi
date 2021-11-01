@@ -1,5 +1,7 @@
+@charset "UTF-8";
 * {
   overflow-x: hidden;
+  font-family: "微軟正黑體";
 }
 
 .test {
@@ -14,11 +16,13 @@
 
 .dochi ul {
   width: 100%;
-  border: solid 1px #000;
+  max-width: 300px;
+  max-height: 429px;
   padding: 0;
 }
 
 .dochi ul li {
+  border: solid 1px #000;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,9 +34,46 @@
       -ms-flex-align: center;
           align-items: center;
   list-style: none;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.dochi ul li img {
+  width: 300px;
+  height: 300px;
+}
+
+.dochi ul li .btn {
+  width: 100%;
+  background: #979696;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dochi ul li .animation_btn {
+  width: 100%;
+  background: #5c5b5b;
+  border: none;
+  border-top: #000 1px solid;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dochi ul li h1, .dochi ul li h2 {
+  text-align: center;
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
 }
 
 .d_none {
   display: none;
+}
+
+.event_none {
+  pointer-events: none;
 }
 /*# sourceMappingURL=Dochi.css.map */

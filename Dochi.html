@@ -12,10 +12,15 @@
         <div class="dochi">
             <ul v-for="data in datas" :class=data.class_name>
                 <li v-if="data.view">
-                    {{ data.name }}
-                    {{ data.id }}
-                    <button v-if="data.lose" @click=eran(data.id) class="btn">pick</button>
-                    <button @click=animation_end() class="animation_btn d_none">aaa</button>
+                    <img :src="data.src">
+                    <h1>
+                        {{ data.name }}
+                    </h1>
+                    <h2>
+                        {{ data.from }}
+                    </h2>
+                    <button v-if="data.lose" @click=eran(data.id) class="btn">選擇</button>
+                    <button @click=animation_end() class="animation_btn d_none">下一輪</button>
                 </li>
 
             </ul>
