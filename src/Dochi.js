@@ -14,7 +14,7 @@ var vm = new Vue({
             id: "1", //id 照著123456789的順序打下去就好
             name: "丁丁", //要顯示的名字
             from: "天線寶寶",//作品的名字
-            src: "img/DingDing.jpg", //圖片放置的連結
+            src: "img/test.mp4", //圖片(影片)放置的連結
             class_name: "", //不用管他 直接複製就好
             view: false, //不用管他 直接複製就好
             lose: true, //不用管他 直接複製就好
@@ -24,7 +24,7 @@ var vm = new Vue({
             id: "2",
             name: "迪西",
             from: "天線寶寶",
-            src: "img/Dicy.jpg",
+            src: "img/test.mp4",
             class_name: "",
             view: false,
             lose: true,
@@ -34,7 +34,7 @@ var vm = new Vue({
             id: "3",
             name: "拉拉",
             from: "天線寶寶",
-            src: "img/LaLa.jpg",
+            src: "img/test.mp4",
             class_name: "",
             view: false,
             lose: true,
@@ -44,7 +44,7 @@ var vm = new Vue({
             id: "4",
             name: "小波",
             from: "天線寶寶",
-            src: "img/Po.png",
+            src: "img/test.mp4",
             class_name: "",
             view: false,
             lose: true,

@@ -12,7 +12,10 @@
         <div class="dochi">
             <ul v-for="data in datas" :class=data.class_name>
                 <li v-if="data.view">
-                    <img :src="data.src">
+                    <!-- <img :src="data.src"> -->
+                    <video width="280px" height="280px" controls>
+                        <source :src="data.src">
+                    </video>
                     <h1>
                         {{ data.name }}
                     </h1>
@@ -42,6 +45,8 @@
             <p class="test">---------------晉級名單---------------</p>
         </div>
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
